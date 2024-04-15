@@ -135,7 +135,7 @@
   }
   
   .playing > svg {
-    fill: var(--highlight-color);
+    fill: #ffb703;
   }
   
   .player-buttons {
