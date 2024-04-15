@@ -134,7 +134,7 @@
     fill: var(--primary-color);
   }
   
-  .playing > svg {
+  .playing > svg, .pausing > svg {
     fill: #ffb703;
   }
   
