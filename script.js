@@ -10,7 +10,7 @@ const allSongs = [{
     title: "Save Me",
     artist: "Anyma, Cassian, Poppy Baskcomb",
     duration: "3:09",
-    src: "./songs/song0.mp3",
+    src: "songs/song0.mp3",
     img: "images/img0.png"
 },
 {
@@ -106,8 +106,15 @@ const playSong = (id) => {
     }
     userData.currentSong = song;
     playButton.classList.add("playing");
-
+    pauseButton.classList.remove("pausing");
     audio.play();
+}
+
+const pauseSong = () => {
+    userData.songCurrentTime = audio.currentTime;
+    playButton.classList.remove("playing");
+    pauseButton.classList.add("pausing");
+    audio.pause();
 }
 
 const renderSongs = (array) => {
@@ -136,6 +143,8 @@ playButton.addEventListener("click", () => {
         playSong(userData?.currentSong.id);
     }
 });
+
+pauseButton.addEventListener("click", pauseSong);
 
 
 const sortSongs = () =>  {
