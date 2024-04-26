@@ -11,7 +11,7 @@ const allSongs = [{
     artist: "Anyma, Cassian, Poppy Baskcomb",
     duration: "3:09",
     src: "songs/song0.mp3",
-    img: "images/img0.png"
+    img: "./images/img0.png"
 },
 {
     id: 1,
@@ -19,7 +19,7 @@ const allSongs = [{
     artist: "DJ Zinc, Mozey, M.A.R.Y",
     duration: "2:36",
     src: "songs/song1.mp3",
-    img: "images/img1.png"
+    img: "./images/img1.png"
 },
 {
     id: 2,
@@ -27,7 +27,7 @@ const allSongs = [{
     artist: "ZH, ODESZA",
     duration: "3:58",
     src: "songs/song2.mp3",
-    img: "images/img2.png"
+    img: "./images/img2.png"
 },
 {
     id: 3,
@@ -35,7 +35,7 @@ const allSongs = [{
     artist: "goddard., Megan Linnell",
     duration: "3:33",
     src: "songs/song3.mp3",
-    img: "images/img3.png"
+    img: "./images/img3.png"
 },
 {
     id: 4,
@@ -43,7 +43,7 @@ const allSongs = [{
     artist: "goddard., Cat Burns",
     duration: "2:27",
     src: "songs/song4.mp3",
-    img: "images/img4.png"
+    img: "./images/img4.png"
 },
 {
     id: 5,
@@ -51,7 +51,7 @@ const allSongs = [{
     artist: "Koven",
     duration: "3:09",
     src: "songs/song5.mp3",
-    img: "images/img5.png"
+    img: "./images/img5.png"
 },
 {
     id: 6,
@@ -59,7 +59,7 @@ const allSongs = [{
     artist: "Matroda",
     duration: "2:53",
     src: "songs/song6.mp3",
-    img: "images/img6.png"
+    img: "./images/img6.png"
 },
 {
     id: 7,
@@ -67,7 +67,7 @@ const allSongs = [{
     artist: "MVTRIIIX, Kingpin Skinny Pimp",
     duration: "2:28",
     src: "songs/song7.mp3",
-    img: "images/img7.png"
+    img: "./images/img7.png"
 },
 {
     id: 8,
@@ -75,7 +75,7 @@ const allSongs = [{
     artist: "Tobiahs",
     duration: "2:38",
     src: "songs/song8.mp3",
-    img: "images/img8.png"
+    img: "./images/img8.png"
 },
 {
     id: 9,
@@ -83,7 +83,7 @@ const allSongs = [{
     artist: "Turno, Skepsis, Charlotte Plank",
     duration: "2:28",
     src: "songs/song9.mp3",
-    img: "images/img9.png"
+    img: "./images/img9.png"
 }];
 
 const audio = new Audio();
@@ -91,7 +91,7 @@ const audio = new Audio();
 let userData = {
     songs: [...allSongs],
     currentSong: null,
-    songCurrentTime: 0
+    songCurrentTime: 0,
 };
 
 const playSong = (id) => {
@@ -107,7 +107,9 @@ const playSong = (id) => {
     userData.currentSong = song;
     playButton.classList.add("playing");
     pauseButton.classList.remove("pausing");
+    setCurrentSongImg();
     highlightCurrentSong();
+    setPlayerDisplay();
     audio.play();
 }
 
@@ -142,6 +144,27 @@ const playNextSong = () => {
         const nextSong = userData?.songs[currentSongIndex + 1];
         playSong(nextSong.id);
     }
+}
+
+const setCurrentSongImg = () => {
+     const playerDisplayImage = document.getElementById("player-display-image");
+        
+     if (userData?.currentSong === null) {
+        playerDisplayImage.setAttribute("src", `${userData?.songs[0].img}`);
+    } else {
+        playerDisplayImage.setAttribute("src", `${userData?.currentSong.img}`);
+    }
+}
+
+const setPlayerDisplay = () => {
+    const playingSong = document.getElementById("player-song-title");
+    const songArtist = document.getElementById("player-song-artist");
+
+    const currentTitle = userData?.currentSong?.title;
+    const currentArtist = userData?.currentSong?.artist;
+
+    playingSong.textContent = currentTitle ? currentTitle : "";
+    songArtist.textContent = currentArtist ? currentArtist : "";
 }
 
 const highlightCurrentSong = () => {
