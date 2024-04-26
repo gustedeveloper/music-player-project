@@ -107,8 +107,8 @@ const playSong = (id) => {
     userData.currentSong = song;
     playButton.classList.add("playing");
     pauseButton.classList.remove("pausing");
+    highlightCurrentSong();
     audio.play();
-    console.log(userData.currentSong);
 }
 
 const pauseSong = () => {
@@ -142,6 +142,17 @@ const playNextSong = () => {
         const nextSong = userData?.songs[currentSongIndex + 1];
         playSong(nextSong.id);
     }
+}
+
+const highlightCurrentSong = () => {
+    const playlistSongsElements = document.querySelectorAll(".playlist-song");
+    const songToHighlight = document.getElementById(`song-${userData?.currentSong?.id}`)
+
+    playlistSongsElements.forEach((songEl) => {
+        songEl.removeAttribute("aria-current");
+    });
+
+    if (songToHighlight) songToHighlight.setAttribute("aria-current", "true");
 }
 
 const renderSongs = (array) => {
