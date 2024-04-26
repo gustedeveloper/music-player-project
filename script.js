@@ -120,6 +120,20 @@ const pauseSong = () => {
 
 const getCurrentSongIndex = () => userData?.songs.indexOf(userData?.currentSong);
 
+const playPreviousSong = () => {
+
+    if (userData?.currentSong === null) {
+        return;
+    } else if (audio.currentTime > 8) {
+        audio.currentTime = 0;
+        playSong(userData?.currentSong.id);
+    } else {
+        const currentSongIndex = getCurrentSongIndex();
+        const previousSong = userData?.songs[currentSongIndex - 1];
+        playSong(previousSong.id);
+    }
+}
+
 const playNextSong = () => {
     if (userData?.currentSong === null) {
         playSong(userData?.songs[0].id);
@@ -160,6 +174,7 @@ playButton.addEventListener("click", () => {
 
 pauseButton.addEventListener("click", pauseSong);
 nextButton.addEventListener("click", playNextSong);
+previousButton.addEventListener("click", playPreviousSong);
 
 const sortSongs = () =>  {
     userData?.songs.sort((a, b) => {
