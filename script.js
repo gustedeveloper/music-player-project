@@ -88,6 +88,30 @@ const allSongs = [{
 
 const audio = new Audio();
 
+const progressBar = document.getElementById('progress-bar');
+
+// Función para actualizar el valor máximo de la barra de progreso cuando se carga una nueva canción
+const updateMaxDuration = () => {
+    progressBar.max = audio.duration;
+};
+
+// Evento para actualizar el valor máximo de la barra de progreso cuando se carga una nueva canción
+audio.addEventListener('loadedmetadata', updateMaxDuration);
+
+// Evento para actualizar el valor máximo de la barra de progreso cuando la canción se cambia
+audio.addEventListener('timeupdate', updateMaxDuration);
+
+// Evento para actualizar la posición de la barra de progreso conforme avanza la canción
+audio.addEventListener('timeupdate', () => {
+    progressBar.value = audio.currentTime;
+});
+
+// Evento para permitir controlar la canción al mover la barra de progreso
+progressBar.addEventListener('input', () => {
+    audio.currentTime = progressBar.value;
+});
+
+
 let userData = {
     songs: [...allSongs],
     currentSong: null,
@@ -187,7 +211,6 @@ const deleteSong = (id) => {
         })
     }
 }
-
 
 const setCurrentSongImg = () => {
      const playerDisplayImage = document.getElementById("player-display-image");
