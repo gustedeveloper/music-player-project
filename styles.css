@@ -128,8 +128,8 @@
   
   .player-display-song-artist {
     height: 80px;
-  }
-  
+  }  
+
   .player-buttons svg {
     fill: var(--primary-color);
   }
@@ -138,6 +138,11 @@
     fill: #ffb703;
   }
   
+  #progress-bar {
+    height: 2px;
+  }
+  
+
   .player-buttons {
     display: flex;
     justify-content: space-around;
