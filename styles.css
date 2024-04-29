@@ -280,6 +280,11 @@
       height: 340px;
     }
   
+    #progress-bar {
+      margin-top: 160px;
+      margin-bottom: 0px;
+    }
+
     #playlist-songs {
       padding: 5px 6px;
       overflow-y: scroll;
